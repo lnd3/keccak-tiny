@@ -162,3 +162,9 @@ defsha3(224)
 defsha3(256)
 defsha3(384)
 defsha3(512)
+
+/*** Ethereum Keccak-256 (pre-FIPS, delimiter 0x01, NOT sha3_256 which uses 0x06) ***/
+int keccak256(uint8_t* out, size_t outlen, const uint8_t* in, size_t inlen) {
+  if (outlen > 32) { return -1; }
+  return hash(out, outlen, in, inlen, 200 - (256 / 4), 0x01);
+}
